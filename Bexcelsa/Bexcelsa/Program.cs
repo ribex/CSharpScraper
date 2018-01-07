@@ -7,7 +7,8 @@ namespace Bexcelsa
     {
         static void Main(string[] args)
         {
-            var chromeDriver = new ChromeDriver();
+
+            var chromeDriver = new ChromeDriver(@"C:\Users\Rebecca\source\repos\CSharpScraper\Bexcelsa");
         }
     }
 }
