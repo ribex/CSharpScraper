@@ -1,4 +1,5 @@
 ﻿using System;
+using OpenQA.Selenium.Chrome;
 
 namespace Bexcelsa
 {
@@ -6,7 +7,7 @@ namespace Bexcelsa
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var chromeDriver = new ChromeDriver();
         }
     }
 }
