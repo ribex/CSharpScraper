@@ -18,6 +18,7 @@ namespace Bexcelsa
 
             // log in to site
             // if this fails, site thinks we are using automation to access it... which we are
+            // may need to add implicit wait or similar strategy
             chrDr.FindElementByXPath("//*[@id=\"sign-in\"]").Click();
             chrDr.FindElementByXPath("//*[@id=\"authentication_login_email\"]").Click();
             chrDr.Keyboard.SendKeys("rebecca.wagaman@intracitygeeks.org");
@@ -32,7 +33,27 @@ namespace Bexcelsa
             var portfolioList = chrDr.FindElementsByCssSelector("#side_portfolio");
             foreach (var symbol in portfolioList)
             {
+                // this puts on each line:
+                // symbol as data-name
+                // company name as id
+                // price as class="price-changes", class="price"
+                // change and percentage as class="price-changes", class="change up" or "change down"; class="percentage up" or "percentage down"
+
+                // example:
+                // <li data-name="aapl" id="sp_slug_aapl" price="175" change="1.139" volume="23660018">
+
+                // <div class="slug-info">
+                // <a class="slug" sasource="side_portfolios" href="/symbol/AAPL" title="Apple Inc.">aapl</a>
+                    // <div class="title-ticker">Apple Inc.</div>
+                    // </div>
+
+                // <div class="price-changes">
+                // <div class="price">$175.00</div>
+                // <div class="change up">1.97</div>
+                // <div class="percentage up">(1.1%)</div>
+                // </div>
                 Console.WriteLine(symbol.Text);
+
             }
         }
     }
