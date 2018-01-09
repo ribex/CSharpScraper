@@ -26,16 +26,27 @@ namespace Bexcelsa
             chrDr.Keyboard.SendKeys("ChromeDriver2018");
             chrDr.FindElementByXPath("//*[@id=\"authentication_login_button\"]/input").Click();
 
-            // navigate to Portfolio
-            chrDr.FindElementByXPath("//*[@id=\"nav_my_portfolio_tab\"]/a").Click();
+            var portfolioLink = chrDr.FindElementByXPath("//*[@id=\"nav_my_portfolio_tab\"]/a");
+            if (portfolioLink != null)
+            {
+                // navigate to Portfolio
+                try
+                {
+                    portfolioLink.Click();
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Automation may be detected.", e);
+                }
+            }
 
             // get portfolio elements
             var portfolioList = chrDr.FindElementsByCssSelector("#side_portfolio");
             foreach (var symbol in portfolioList)
             {
                 // this puts on each line:
-                // symbol as data-name
-                // company name as id
+                // symbol as inner text in slug
+                // company name as slug title
                 // price as class="price-changes", class="price"
                 // change and percentage as class="price-changes", class="change up" or "change down"; class="percentage up" or "percentage down"
 
@@ -52,7 +63,8 @@ namespace Bexcelsa
                 // <div class="change up">1.97</div>
                 // <div class="percentage up">(1.1%)</div>
                 // </div>
-                Console.WriteLine(symbol.Text);
+                var text = symbol.Text.ToCharArray();
+                Console.WriteLine(text);
 
             }
         }
