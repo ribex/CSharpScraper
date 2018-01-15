@@ -25,6 +25,7 @@ namespace Bexcelsa
             chrDr.Keyboard.SendKeys(Keys.Tab);
             chrDr.Keyboard.SendKeys("ChromeDriver2018");
             chrDr.FindElementByXPath("//*[@id=\"authentication_login_button\"]/input").Click();
+            // need to do something about not logging in / recaptcha?
 
             var portfolioLink = chrDr.FindElementByXPath("//*[@id=\"nav_my_portfolio_tab\"]/a");
             if (portfolioLink != null)
