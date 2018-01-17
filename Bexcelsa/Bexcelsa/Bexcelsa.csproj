@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="NUnit" Version="3.9.0" />
     <PackageReference Include="Selenium.Chrome.WebDriver" Version="2.33.0" />
     <PackageReference Include="Selenium.WebDriver" Version="3.8.0" />
     <PackageReference Include="Selenium.WebDriver.Equip" Version="0.4.130" />
