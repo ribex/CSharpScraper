@@ -23,9 +23,12 @@ namespace Bexcelsa
             chrDr.FindElementByXPath("//*[@id=\"authentication_login_email\"]").Click();
             chrDr.Keyboard.SendKeys("rebecca.wagaman@intracitygeeks.org");
             chrDr.Keyboard.SendKeys(Keys.Tab);
+
+            // storing password here and in plaintext is very much less than ideal, need to change this later
             chrDr.Keyboard.SendKeys("ChromeDriver2018");
 
             chrDr.FindElementByXPath("//*[@id=\"authentication_login_button\"]/input").Click();
+
             // need to do something about not logging in / recaptcha?
 
             var portfolioLink = chrDr.FindElementByXPath("//*[@id=\"nav_my_portfolio_tab\"]/a");
