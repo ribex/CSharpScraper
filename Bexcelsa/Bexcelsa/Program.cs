@@ -10,44 +10,48 @@ namespace Bexcelsa
         static void Main(string[] args)
         {
             var chrDr = new ChromeDriver(@"C:\Users\Rebecca\source\repos\CSharpScraper\Bexcelsa");
-            chrDr.Navigate().GoToUrl("https://seekingalpha.com/");
+            chrDr.Navigate().GoToUrl("https://finance.yahoo.com/");
 
 //            chromeDriver.FindElementByXPath("//*[@id=\"hd-auto\"]").Click();
 //            chromeDriver.Keyboard.SendKeys("Amazon");
 //            chromeDriver.Keyboard.SendKeys(Keys.Enter);
 
             // log in to site
-            // if this fails, site thinks we are using automation to access it... which we are
-            // may need to add implicit wait or similar strategy
-            chrDr.FindElementByXPath("//*[@id=\"sign-in\"]").Click();
-            chrDr.FindElementByXPath("//*[@id=\"authentication_login_email\"]").Click();
-            chrDr.Keyboard.SendKeys("rebecca.wagaman@intracitygeeks.org");
-            chrDr.Keyboard.SendKeys(Keys.Tab);
+            // send email address
+            chrDr.FindElementByXPath("//*[@id=\"uh-signedin\"]").Click();
+            chrDr.FindElementByXPath("//*[@id=\"login-username\"]").Click();
+            chrDr.Keyboard.SendKeys("ribexy@gmail.com");
+            chrDr.FindElementByXPath("//*[@id=\"login-signin\"]").Click();
+            // send password
+            chrDr.FindElementByXPath("//*[@id=\"login-passwd\"]").Click();
+            chrDr.Keyboard.SendKeys("ChromeDriver2018");
+            chrDr.FindElementByXPath("//*[@id=\"login-signin\"]");
+//            chrDr.Keyboard.SendKeys(Keys.Tab);
 
             // storing password here and in plaintext is very much less than ideal, need to change this later
-            chrDr.Keyboard.SendKeys("ChromeDriver2018");
-
-            chrDr.FindElementByXPath("//*[@id=\"authentication_login_button\"]/input").Click();
+//            chrDr.Keyboard.SendKeys("ChromeDriver2018");
+//
+//            chrDr.FindElementByXPath("//*[@id=\"authentication_login_button\"]/input").Click();
 
             // need to do something about not logging in / recaptcha?
 
-            var portfolioLink = chrDr.FindElementByXPath("//*[@id=\"nav_my_portfolio_tab\"]/a");
-            if (portfolioLink != null)
-            {
-                // navigate to Portfolio
-                try
-                {
-                    portfolioLink.Click();
-                }
-                catch (Exception e)
-                {
-                    throw new Exception("Automation may be detected.", e);
-                }
-            }
+//            var portfolioLink = chrDr.FindElementByXPath("//*[@id=\"nav_my_portfolio_tab\"]/a");
+//            if (portfolioLink != null)
+//            {
+//                // navigate to Portfolio
+//                try
+//                {
+//                    portfolioLink.Click();
+//                }
+//                catch (Exception e)
+//                {
+//                    throw new Exception("Automation may be detected.", e);
+//                }
+//            }
 
             // get portfolio elements
-            var portfolioList = chrDr.FindElementsByCssSelector("#side_portfolio");
-            foreach (var symbol in portfolioList)
+//            var portfolioList = chrDr.FindElementsByCssSelector("#side_portfolio");
+//            foreach (var symbol in portfolioList)
             {
                 // this puts on each line:
                 // symbol as inner text in slug
@@ -68,8 +72,8 @@ namespace Bexcelsa
                 // <div class="change up">1.97</div>
                 // <div class="percentage up">(1.1%)</div>
                 // </div>
-                var text = symbol.Text.ToCharArray();
-                Console.WriteLine(text);
+//                var text = symbol.Text.ToCharArray();
+//                Console.WriteLine(text);
 
             }
         }
