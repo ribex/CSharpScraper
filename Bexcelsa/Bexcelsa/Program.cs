@@ -25,8 +25,7 @@ namespace Bexcelsa
             // send password
             chrDr.FindElementByXPath("//*[@id=\"login-passwd\"]").Click();
             chrDr.Keyboard.SendKeys("ChromeDriver2018");
-            chrDr.FindElementByXPath("//*[@id=\"login-signin\"]");
-//            chrDr.Keyboard.SendKeys(Keys.Tab);
+            chrDr.FindElementByXPath("//*[@id=\"login-signin\"]").Click();
 
             // storing password here and in plaintext is very much less than ideal, need to change this later
 //            chrDr.Keyboard.SendKeys("ChromeDriver2018");

@@ -3,6 +3,7 @@ using OpenQA.Selenium.Chrome;
 
 namespace Bexcelsa
 {
+    [TestFixture]
     public class NUnitTest
     {
         private ChromeDriver _driver;
@@ -16,7 +17,8 @@ namespace Bexcelsa
         [Test]
         public void OpenAppTest()
         {
-            _driver.Url = "http://www.demoqa.com";
+//            _driver.Url = "http://www.demoqa.com";
+            _driver.Navigate().GoToUrl("http://yahoo.com");
         }
 
         [TearDown]
