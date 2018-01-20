@@ -9,16 +9,16 @@ namespace Bexcelsa
     {
         static void Main(string[] args)
         {
+            // var portfolioName = "DaydreamsCanComeTrue";
+
+
             var chrDr = new ChromeDriver(@"C:\Users\Rebecca\source\repos\CSharpScraper\Bexcelsa");
             chrDr.Navigate().GoToUrl("https://finance.yahoo.com/");
 
-//            chromeDriver.FindElementByXPath("//*[@id=\"hd-auto\"]").Click();
-//            chromeDriver.Keyboard.SendKeys("Amazon");
-//            chromeDriver.Keyboard.SendKeys(Keys.Enter);
-
             // log in to site
             // send email address
-            chrDr.FindElementByXPath("//*[@id=\"uh-signedin\"]").Click();
+            chrDr.FindElement(By.Id("uh-signedin")).Click();
+            // chrDr.FindElementByXPath("//*[@id=\"uh-signedin\"]").Click();
             chrDr.FindElementByXPath("//*[@id=\"login-username\"]").Click();
             chrDr.Keyboard.SendKeys("ribexy@gmail.com");
             chrDr.FindElementByXPath("//*[@id=\"login-signin\"]").Click();
@@ -27,26 +27,29 @@ namespace Bexcelsa
             chrDr.Keyboard.SendKeys("ChromeDriver2018");
             chrDr.FindElementByXPath("//*[@id=\"login-signin\"]").Click();
 
-            // go to portfolios
-            chrDr.FindElementByXPath("//*[@id=\"Nav-0-DesktopNav\"]/div/div[3]/div/div[1]/ul/li[2]/a").Click();
+            // go to portfolio
+            chrDr.Navigate().GoToUrl("https://finance.yahoo.com/portfolio/p_1/view/v1");
 
-//            var portfolioLink = chrDr.FindElementByXPath("//*[@id=\"nav_my_portfolio_tab\"]/a");
-//            if (portfolioLink != null)
-//            {
-//                // navigate to Portfolio
-//                try
-//                {
-//                    portfolioLink.Click();
-//                }
-//                catch (Exception e)
-//                {
-//                    throw new Exception("Automation may be detected.", e);
-//                }
-//            }
+            // var table = chrDr.FindElementByXPath("//*[@id=\"main\"]/section/section[2]/div[2]/table");
+            var table = chrDr.FindElementByXPath("//table[@data-test=\"contentTable\"]/tbody");
+
+            var rows = table.FindElements(By.TagName("tr"));
+            foreach (var row in rows)
+            {
+                Console.WriteLine(row);
+            }
 
             // get portfolio elements
-//            var portfolioList = chrDr.FindElementsByCssSelector("#side_portfolio");
-//            foreach (var symbol in portfolioList)
+            //            var tableBody = chrDr.FindElementByXPath("//*[@id=\"main\"]/section/section[2]/div[2]/table/tbody");
+            //
+            //            var bodyText = tableBody.ToString();
+            //
+            //            Console.WriteLine(bodyText);
+
+
+
+            //            var portfolioList = chrDr.FindElementsByCssSelector("#side_portfolio");
+            //            foreach (var symbol in portfolioList)
             {
                 // this puts on each line:
                 // symbol as inner text in slug
@@ -59,16 +62,16 @@ namespace Bexcelsa
 
                 // <div class="slug-info">
                 // <a class="slug" sasource="side_portfolios" href="/symbol/AAPL" title="Apple Inc.">aapl</a>
-                    // <div class="title-ticker">Apple Inc.</div>
-                    // </div>
+                // <div class="title-ticker">Apple Inc.</div>
+                // </div>
 
                 // <div class="price-changes">
                 // <div class="price">$175.00</div>
                 // <div class="change up">1.97</div>
                 // <div class="percentage up">(1.1%)</div>
                 // </div>
-//                var text = symbol.Text.ToCharArray();
-//                Console.WriteLine(text);
+                //                var text = symbol.Text.ToCharArray();
+                //                Console.WriteLine(text);
 
             }
         }
