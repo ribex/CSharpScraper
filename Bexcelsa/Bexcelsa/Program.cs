@@ -5,6 +5,31 @@ using OpenQA.Selenium.Chrome;
 
 namespace Bexcelsa
 {
+    public class Credentials
+    {
+        public Credentials()
+        {
+            
+        }
+
+        // log in to site
+        public static void Login(string username, string password, ChromeDriver driver)
+        {
+            // send email address
+            driver.FindElement(By.Id("uh-signedin")).Click();
+            driver.FindElement(By.Id("login-username")).Click();
+            driver.Keyboard.SendKeys(username);
+            driver.FindElement(By.Id("login-signin")).Click();
+            // send password
+            driver.FindElement(By.Id("login-passwd")).Click();
+            driver.Keyboard.SendKeys(password);
+            driver.FindElement(By.Id("login-signin")).Click();
+        }
+
+        public string Username { get; set; }
+        public string Password { get; set; }
+    }
+
     public class Program
     {
         private static void Main(string[] args)
@@ -12,16 +37,7 @@ namespace Bexcelsa
             var chrDr = new ChromeDriver(@"C:\Users\Rebecca\source\repos\CSharpScraper\Bexcelsa");
             chrDr.Navigate().GoToUrl("https://finance.yahoo.com/");
 
-            // log in to site
-            // send email address
-            chrDr.FindElement(By.Id("uh-signedin")).Click();
-            chrDr.FindElement(By.Id("login-username")).Click();
-            chrDr.Keyboard.SendKeys("ribexy@gmail.com");
-            chrDr.FindElement(By.Id("login-signin")).Click();
-            // send password
-            chrDr.FindElement(By.Id("login-passwd")).Click();
-            chrDr.Keyboard.SendKeys("ChromeDriver2018");
-            chrDr.FindElement(By.Id("login-signin")).Click();
+            Credentials.Login("ribexy@gmail.com", "ChromeDriver2018", chrDr);
 
             // go to portfolio
             chrDr.Navigate().GoToUrl("https://finance.yahoo.com/portfolio/p_1/view/v1");
@@ -60,7 +76,6 @@ namespace Bexcelsa
 //                    symbol.LastPrice = Convert.ToDouble(lastPrice);
                     // Console.WriteLine(lastPrice);
                     // Console.WriteLine("added");
-                
             }
             Symbol.SymbolPrint(symbolList);
         }
