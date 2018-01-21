@@ -5,9 +5,9 @@ using OpenQA.Selenium.Chrome;
 
 namespace Bexcelsa
 {
-    partial class Program
+    public class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             var chrDr = new ChromeDriver(@"C:\Users\Rebecca\source\repos\CSharpScraper\Bexcelsa");
             chrDr.Navigate().GoToUrl("https://finance.yahoo.com/");
@@ -62,21 +62,7 @@ namespace Bexcelsa
                     // Console.WriteLine("added");
                 
             }
-
-            foreach (var symbol in symbolList)
-            {
-                Console.WriteLine("SymbolName: " + symbol.SymbolName);
-                Console.WriteLine("LastPrice: " + symbol.LastPrice);
-                Console.WriteLine("Change: " + symbol.Change);
-                Console.WriteLine("Percent Change: " + symbol.PercentChange);
-                Console.WriteLine("Volume: " + symbol.Volume);
-                Console.WriteLine("Shares: " + symbol.Shares);
-                Console.WriteLine("Average Volume (3 months): " + symbol.AvgVol3Mon);
-                Console.WriteLine("Market Cap: " + symbol.MarketCap);
-            }
-
-
-            
+            Symbol.SymbolPrint(symbolList);
         }
     }
 }
