@@ -6,11 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.2.0" />
+    <PackageReference Include="Microsoft.Composition" Version="1.0.31" />
     <PackageReference Include="NUnit" Version="3.9.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.9.0" />
     <PackageReference Include="Selenium.WebDriver" Version="3.8.0" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="2.35.0" />
     <PackageReference Include="Selenium.WebDriver.Equip" Version="0.4.130" />
+    <PackageReference Include="System.Composition" Version="1.1.0" />
   </ItemGroup>
 
 </Project>

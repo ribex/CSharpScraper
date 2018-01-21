@@ -5,31 +5,6 @@ using OpenQA.Selenium.Chrome;
 
 namespace Bexcelsa
 {
-    public class Credentials
-    {
-        public Credentials()
-        {
-            
-        }
-
-        // log in to site
-        public static void Login(string username, string password, ChromeDriver driver)
-        {
-            // send email address
-            driver.FindElement(By.Id("uh-signedin")).Click();
-            driver.FindElement(By.Id("login-username")).Click();
-            driver.Keyboard.SendKeys(username);
-            driver.FindElement(By.Id("login-signin")).Click();
-            // send password
-            driver.FindElement(By.Id("login-passwd")).Click();
-            driver.Keyboard.SendKeys(password);
-            driver.FindElement(By.Id("login-signin")).Click();
-        }
-
-        public string Username { get; set; }
-        public string Password { get; set; }
-    }
-
     public class Program
     {
         private static void Main(string[] args)
@@ -55,29 +30,43 @@ namespace Bexcelsa
             foreach (var row in rows)
             {
                 var rowTds = row.FindElements(By.TagName("td"));
-                var rowTdsCount = rowTds.Count;
                 symbolList.Add(new Symbol
                 {
                     SymbolName = rowTds[0].Text,
-                    LastPrice = rowTds[1].Text,
-                    Change = rowTds[2].Text,
+                    LastPrice = Convert.ToDouble(rowTds[1].Text),
+                    Change = Convert.ToDouble(rowTds[2].Text),
                     PercentChange = rowTds[3].Text,
                     Currency = rowTds[4].Text,
                     MarketTime = rowTds[5].Text,
                     Volume = rowTds[6].Text,
-                    Shares = rowTds[7].Text,
+                    Shares = Convert.ToDouble(rowTds[7].Text),
                     AvgVol3Mon = rowTds[8].Text,
                     MarketCap = rowTds[12].Text
                 });
-//                    var a = td.FindElement(By.TagName("a"));
-//                    symbol.SymbolName = a.Text;
-//                    Console.WriteLine(symbol.SymbolName);
-                    // var lastPrice = td.FindElement(By.TagName("span")).Text;
-//                    symbol.LastPrice = Convert.ToDouble(lastPrice);
-                    // Console.WriteLine(lastPrice);
-                    // Console.WriteLine("added");
-            }
-            Symbol.SymbolPrint(symbolList);
+
+                var symbol = new Symbol
+                {
+                    SymbolName = rowTds[0].Text,
+                    LastPrice = Convert.ToDouble(rowTds[1].Text),
+                    Change = Convert.ToDouble(rowTds[2].Text),
+                    PercentChange = rowTds[3].Text,
+                    Currency = rowTds[4].Text,
+                    MarketTime = rowTds[5].Text,
+                    Volume = rowTds[6].Text,
+                    Shares = Convert.ToDouble(rowTds[7].Text),
+                    AvgVol3Mon = rowTds[8].Text,
+                    MarketCap = rowTds[12].Text
+                };
+
+                using (var db = new Symbol.SymbolContext())
+                {
+                    db.Symbols.Add(symbol);
+                    db.SaveChanges();
+
+                }
+                // Symbol.SymbolPrint(symbolList);
+
+}
         }
     }
 }
