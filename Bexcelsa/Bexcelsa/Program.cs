@@ -9,9 +9,6 @@ namespace Bexcelsa
     {
         static void Main(string[] args)
         {
-            // var portfolioName = "DaydreamsCanComeTrue";
-
-
             var chrDr = new ChromeDriver(@"C:\Users\Rebecca\source\repos\CSharpScraper\Bexcelsa");
             chrDr.Navigate().GoToUrl("https://finance.yahoo.com/");
 
@@ -29,49 +26,57 @@ namespace Bexcelsa
             // go to portfolio
             chrDr.Navigate().GoToUrl("https://finance.yahoo.com/portfolio/p_1/view/v1");
 
-            // var table = chrDr.FindElementByXPath("//*[@id=\"main\"]/section/section[2]/div[2]/table");
+            // get the table
             var table = chrDr.FindElementByXPath("//table[@data-test=\"contentTable\"]/tbody");
+
+            // get all the rows
             var rows = table.FindElements(By.TagName("tr"));
+            var rowCount = rows.Count;
+            Console.WriteLine("Row count: " + rowCount);
+
+            var symbolList = new List<Symbol>();
+
             foreach (var row in rows)
             {
-                Console.WriteLine(row.Text);
+                var rowTds = row.FindElements(By.TagName("td"));
+                var rowTdsCount = rowTds.Count;
+                symbolList.Add(new Symbol
+                {
+                    SymbolName = rowTds[0].Text,
+                    LastPrice = rowTds[1].Text,
+                    Change = rowTds[2].Text,
+                    PercentChange = rowTds[3].Text,
+                    Currency = rowTds[4].Text,
+                    MarketTime = rowTds[5].Text,
+                    Volume = rowTds[6].Text,
+                    Shares = rowTds[7].Text,
+                    AvgVol3Mon = rowTds[8].Text,
+                    MarketCap = rowTds[12].Text
+                });
+//                    var a = td.FindElement(By.TagName("a"));
+//                    symbol.SymbolName = a.Text;
+//                    Console.WriteLine(symbol.SymbolName);
+                    // var lastPrice = td.FindElement(By.TagName("span")).Text;
+//                    symbol.LastPrice = Convert.ToDouble(lastPrice);
+                    // Console.WriteLine(lastPrice);
+                    // Console.WriteLine("added");
+                
             }
 
-            // get portfolio elements
-            //            var tableBody = chrDr.FindElementByXPath("//*[@id=\"main\"]/section/section[2]/div[2]/table/tbody");
-            //
-            //            var bodyText = tableBody.ToString();
-            //
-            //            Console.WriteLine(bodyText);
-
-
-
-            //            var portfolioList = chrDr.FindElementsByCssSelector("#side_portfolio");
-            //            foreach (var symbol in portfolioList)
+            foreach (var symbol in symbolList)
             {
-                // this puts on each line:
-                // symbol as inner text in slug
-                // company name as slug title
-                // price as class="price-changes", class="price"
-                // change and percentage as class="price-changes", class="change up" or "change down"; class="percentage up" or "percentage down"
-
-                // example:
-                // <li data-name="aapl" id="sp_slug_aapl" price="175" change="1.139" volume="23660018">
-
-                // <div class="slug-info">
-                // <a class="slug" sasource="side_portfolios" href="/symbol/AAPL" title="Apple Inc.">aapl</a>
-                // <div class="title-ticker">Apple Inc.</div>
-                // </div>
-
-                // <div class="price-changes">
-                // <div class="price">$175.00</div>
-                // <div class="change up">1.97</div>
-                // <div class="percentage up">(1.1%)</div>
-                // </div>
-                //                var text = symbol.Text.ToCharArray();
-                //                Console.WriteLine(text);
-
+                Console.WriteLine("SymbolName: " + symbol.SymbolName);
+                Console.WriteLine("LastPrice: " + symbol.LastPrice);
+                Console.WriteLine("Change: " + symbol.Change);
+                Console.WriteLine("Percent Change: " + symbol.PercentChange);
+                Console.WriteLine("Volume: " + symbol.Volume);
+                Console.WriteLine("Shares: " + symbol.Shares);
+                Console.WriteLine("Average Volume (3 months): " + symbol.AvgVol3Mon);
+                Console.WriteLine("Market Cap: " + symbol.MarketCap);
             }
+
+
+            
         }
     }
 }
