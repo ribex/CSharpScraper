@@ -18,14 +18,13 @@ namespace Bexcelsa
             // log in to site
             // send email address
             chrDr.FindElement(By.Id("uh-signedin")).Click();
-            // chrDr.FindElementByXPath("//*[@id=\"uh-signedin\"]").Click();
-            chrDr.FindElementByXPath("//*[@id=\"login-username\"]").Click();
+            chrDr.FindElement(By.Id("login-username")).Click();
             chrDr.Keyboard.SendKeys("ribexy@gmail.com");
-            chrDr.FindElementByXPath("//*[@id=\"login-signin\"]").Click();
+            chrDr.FindElement(By.Id("login-signin")).Click();
             // send password
-            chrDr.FindElementByXPath("//*[@id=\"login-passwd\"]").Click();
+            chrDr.FindElement(By.Id("login-passwd")).Click();
             chrDr.Keyboard.SendKeys("ChromeDriver2018");
-            chrDr.FindElementByXPath("//*[@id=\"login-signin\"]").Click();
+            chrDr.FindElement(By.Id("login-signin")).Click();
 
             // go to portfolio
             chrDr.Navigate().GoToUrl("https://finance.yahoo.com/portfolio/p_1/view/v1");
