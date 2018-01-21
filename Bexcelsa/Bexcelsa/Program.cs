@@ -31,11 +31,10 @@ namespace Bexcelsa
 
             // var table = chrDr.FindElementByXPath("//*[@id=\"main\"]/section/section[2]/div[2]/table");
             var table = chrDr.FindElementByXPath("//table[@data-test=\"contentTable\"]/tbody");
-
             var rows = table.FindElements(By.TagName("tr"));
             foreach (var row in rows)
             {
-                Console.WriteLine(row);
+                Console.WriteLine(row.Text);
             }
 
             // get portfolio elements
