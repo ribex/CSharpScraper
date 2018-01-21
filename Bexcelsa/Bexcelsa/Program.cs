@@ -5,7 +5,7 @@ using OpenQA.Selenium.Chrome;
 
 namespace Bexcelsa
 {
-    class Program
+    partial class Program
     {
         static void Main(string[] args)
         {
