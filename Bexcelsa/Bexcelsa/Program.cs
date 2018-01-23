@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using OpenQA.Selenium;
@@ -29,58 +30,46 @@ namespace Bexcelsa
             var rowCount = rows.Count;
             Console.WriteLine("Row count: " + rowCount);
 
-            //var symbolList = new List<Symbol>();
+            var symbolList = new List<Symbol>();
 
-            foreach (var row in rows)
+            for (var i = 1; i <= rowCount; i++)
             {
-                var rowTds = row.FindElements(By.TagName("td"));
-                //                symbolList.Add(new Symbol
-                //                {
-                //                    SymbolName = rowTds[0].Text,
-                //                    LastPrice = Convert.ToDouble(rowTds[1].Text),
-                //                    Change = Convert.ToDouble(rowTds[2].Text),
-                //                    PercentChange = rowTds[3].Text,
-                //                    Currency = rowTds[4].Text,
-                //                    MarketTime = rowTds[5].Text,
-                //                    Volume = rowTds[6].Text,
-                //                    Shares = Convert.ToDouble(rowTds[7].Text),
-                //                    AvgVol3Mon = rowTds[8].Text,
-                //                    MarketCap = rowTds[12].Text
-                //                });
+                var rowIndex = $"//tr[{i}]/";
 
                 var symbol = new Symbol
                 {
-                    SymbolName = rowTds[0].Text,
-                    LastPrice = Convert.ToDouble(rowTds[1].Text),
-                    Change = Convert.ToDouble(rowTds[2].Text),
-                    PercentChange = rowTds[3].Text,
-                    Currency = rowTds[4].Text,
-                    MarketTime = rowTds[5].Text,
-                    Volume = rowTds[6].Text,
-                    Shares = Convert.ToDouble(rowTds[7].Text),
-                    AvgVol3Mon = rowTds[8].Text,
-                    MarketCap = rowTds[12].Text
+                    SymbolName = table.FindElement(By.XPath(rowIndex + "td[1]/span/a")).Text,
+                    LastPrice = Convert.ToDouble(table.FindElement(By.XPath(rowIndex + "td[2]/span")).Text),
+                    Change = Convert.ToDouble(table.FindElement(By.XPath(rowIndex + "td[3]/span")).Text),
+                    PercentChange = table.FindElement(By.XPath(rowIndex + "td[4]/span")).Text,
+                    Currency = table.FindElement(By.XPath(rowIndex + "td[5]")).Text,
+                    MarketTime = table.FindElement(By.XPath(rowIndex + "td[6]/span")).Text,
+                    Volume = table.FindElement(By.XPath(rowIndex + "td[7]/span")).Text,
+                    Shares = Convert.ToDouble(table.FindElement(By.XPath(rowIndex + "td[8]")).Text),
+                    AvgVol3Mon = table.FindElement(By.XPath(rowIndex + "td[9]")).Text,
+                    MarketCap = table.FindElement(By.XPath(rowIndex + "td[13]/span")).Text
                 };
 
-                using (var db = new PortfolioContext())
-                {
-                    db.Portfolios.Add(portfolio);
-                    db.SaveChanges();
+                symbolList.Add(symbol);
+            }
 
-                    var query = from b in db.Portfolios
-                        orderby b.Name
-                        select b;
+            //using (var db = new PortfolioContext())
+            //{
+            //    db.Portfolios.Add(portfolio);
+            //    db.SaveChanges();
 
-                    Console.WriteLine("All portfolios in the database: ");
-                    foreach (var item in query)
-                    {
-                        Console.WriteLine(item.Name);
-                    }
+            //    var query = from b in db.Portfolios
+            //        orderby b.Name
+            //        select b;
 
-                }
-                // Symbol.SymbolPrint(symbolList);
+            //    Console.WriteLine("All portfolios in the database: ");
+            //    foreach (var item in query)
+            //    {
+            //        Console.WriteLine(item.Name);
+            //    }
 
-}
+            //}
+            Symbol.SymbolPrint(symbolList);
         }
     }
 }
