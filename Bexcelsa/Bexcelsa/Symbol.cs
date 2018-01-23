@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 
 namespace Bexcelsa
 {
@@ -10,6 +9,9 @@ namespace Bexcelsa
         {
                 
         }
+
+        // primary key
+        public int SymbolId { get; set; }
 
         public string SymbolName { get; set; }
         public double LastPrice { get; set; }
@@ -27,7 +29,11 @@ namespace Bexcelsa
         // todo: convert MarketCap from string to Int32
         public string MarketCap { get; set; }
 
-        public virtual List<Symbol> Symbols { get; set; }
+        // foreign key
+        public int PortfolioId { get; set; }
+
+        // navigation property
+        public virtual Portfolio Portfolio { get; set; }
 
         public static void SymbolPrint(List<Symbol> list)
         {
@@ -42,11 +48,6 @@ namespace Bexcelsa
                 Console.WriteLine("Average Volume (3 months): " + symbol.AvgVol3Mon);
                 Console.WriteLine("Market Cap: " + symbol.MarketCap);
             }
-        }
-
-        public class SymbolContext : DbContext
-        {
-            public DbSet<Symbol> Symbols { get; set; }
         }
     }
 }

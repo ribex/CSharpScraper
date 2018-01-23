@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bexcelsa", "Bexcelsa\Bexcelsa.csproj", "{875E9C10-4DE9-40E9-B16E-AE00915B8D84}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityTest", "EntityTest\EntityTest.csproj", "{5418B9BD-6951-4094-BCFA-61C2AAC25E95}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{875E9C10-4DE9-40E9-B16E-AE00915B8D84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{875E9C10-4DE9-40E9-B16E-AE00915B8D84}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{875E9C10-4DE9-40E9-B16E-AE00915B8D84}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{875E9C10-4DE9-40E9-B16E-AE00915B8D84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5418B9BD-6951-4094-BCFA-61C2AAC25E95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5418B9BD-6951-4094-BCFA-61C2AAC25E95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5418B9BD-6951-4094-BCFA-61C2AAC25E95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5418B9BD-6951-4094-BCFA-61C2AAC25E95}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {2D24CFCA-A192-4298-B880-7D935743C48B}
+		SolutionGuid = {C5209F64-96E2-4253-A7DA-D910BBC11D45}
 	EndGlobalSection
 EndGlobal
