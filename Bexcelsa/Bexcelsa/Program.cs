@@ -70,6 +70,8 @@ namespace Bexcelsa
 
             //}
             Symbol.SymbolPrint(symbolList);
+
+            // work on learning entity framework
         }
     }
 }
