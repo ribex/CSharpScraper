@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 
 namespace Bexcelsa
 {
@@ -13,25 +11,17 @@ namespace Bexcelsa
         {
             var portfolio = new Portfolio {Name = "DaydreamsCanComeTrue"};
 
-            var chrDr = new ChromeDriver(@"C:\Users\Rebecca\source\repos\CSharpScraper\Bexcelsa");
-            chrDr.Navigate().GoToUrl("https://finance.yahoo.com/");
+            var chrDr = new Driver(@"C:\Users\Rebecca\source\repos\CSharpScraper\Bexcelsa");
+
+            // go to Yahoo Finance
+            chrDr.Navigate("https://finance.yahoo.com/");
 
             Credentials.Login("ribexy@gmail.com", "ChromeDriver2018", chrDr);
 
             // go to portfolio
-            chrDr.Navigate().GoToUrl("https://finance.yahoo.com/portfolio/p_1/view/v1");
+            chrDr.Navigate("https://finance.yahoo.com/portfolio/p_1/view/v1");
 
-            // get the table
-            Thread.Sleep(3000);
-            var table = chrDr.FindElementByXPath("//table[@data-test=\"contentTable\"]/tbody");
-
-            // get current date time and apply to symbols
-            var timeNow = DateTime.Now;
-
-            // get all the rows
-            var rows = table.FindElements(By.TagName("tr"));
-            var rowCount = rows.Count;
-            Console.WriteLine("Row count: " + rowCount);
+            DataCollector.GetTable(chrDr);
 
             var symbolList = new List<Symbol>();
 
