@@ -25,6 +25,9 @@ namespace Bexcelsa
             Thread.Sleep(3000);
             var table = chrDr.FindElementByXPath("//table[@data-test=\"contentTable\"]/tbody");
 
+            // get current date time and apply to symbols
+            var timeNow = DateTime.Now;
+
             // get all the rows
             var rows = table.FindElements(By.TagName("tr"));
             var rowCount = rows.Count;
@@ -43,7 +46,8 @@ namespace Bexcelsa
                     Change = Convert.ToDouble(table.FindElement(By.XPath(rowIndex + "td[3]/span")).Text),
                     PercentChange = table.FindElement(By.XPath(rowIndex + "td[4]/span")).Text,
                     Currency = table.FindElement(By.XPath(rowIndex + "td[5]")).Text,
-                    MarketTime = table.FindElement(By.XPath(rowIndex + "td[6]/span")).Text,
+                    MarketTime = timeNow,
+                    //MarketTime = table.FindElement(By.XPath(rowIndex + "td[6]/span")).Text,
                     Volume = table.FindElement(By.XPath(rowIndex + "td[7]/span")).Text,
                     Shares = Convert.ToDouble(table.FindElement(By.XPath(rowIndex + "td[8]")).Text),
                     AvgVol3Mon = table.FindElement(By.XPath(rowIndex + "td[9]")).Text,

@@ -20,7 +20,7 @@ namespace Bexcelsa
         public string PercentChange { get; set; }
         public string Currency { get; set; }
         // todo: convert DateTime from string to DateTime
-        public string MarketTime { get; set; }
+        public DateTime MarketTime { get; set; }
         // todo: convert Volume from string to Int32
         public string Volume { get; set; }
         public double Shares { get; set; }
@@ -43,6 +43,7 @@ namespace Bexcelsa
                 Console.WriteLine("Last Price: " + symbol.LastPrice);
                 Console.WriteLine("Change: " + symbol.Change);
                 Console.WriteLine("Percent Change: " + symbol.PercentChange);
+                Console.WriteLine("Market Time: " + symbol.MarketTime);
                 Console.WriteLine("Volume: " + symbol.Volume);
                 Console.WriteLine("Shares: " + symbol.Shares);
                 Console.WriteLine("Average Volume (3 months): " + symbol.AvgVol3Mon);
