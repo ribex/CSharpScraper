@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using OpenQA.Selenium;
+﻿using System.Linq;
 
 namespace Bexcelsa
 {
@@ -21,31 +18,12 @@ namespace Bexcelsa
             // go to portfolio
             chrDr.Navigate("https://finance.yahoo.com/portfolio/p_1/view/v1");
 
-            DataCollector.GetTable(chrDr);
+            var table = DataManipulator.GetTable(chrDr);
 
-            var symbolList = new List<Symbol>();
+            DataManipulator.ParseTable(table, chrDr);
 
-            for (var i = 1; i <= rowCount; i++)
-            {
-                var rowIndex = $"//tr[{i}]/";
 
-                var symbol = new Symbol
-                {
-                    SymbolName = table.FindElement(By.XPath(rowIndex + "td[1]/span/a")).Text,
-                    LastPrice = Convert.ToDouble(table.FindElement(By.XPath(rowIndex + "td[2]/span")).Text),
-                    Change = Convert.ToDouble(table.FindElement(By.XPath(rowIndex + "td[3]/span")).Text),
-                    PercentChange = table.FindElement(By.XPath(rowIndex + "td[4]/span")).Text,
-                    Currency = table.FindElement(By.XPath(rowIndex + "td[5]")).Text,
-                    MarketTime = timeNow,
-                    //MarketTime = table.FindElement(By.XPath(rowIndex + "td[6]/span")).Text,
-                    Volume = table.FindElement(By.XPath(rowIndex + "td[7]/span")).Text,
-                    Shares = Convert.ToDouble(table.FindElement(By.XPath(rowIndex + "td[8]")).Text),
-                    AvgVol3Mon = table.FindElement(By.XPath(rowIndex + "td[9]")).Text,
-                    MarketCap = table.FindElement(By.XPath(rowIndex + "td[13]/span")).Text
-                };
 
-                symbolList.Add(symbol);
-            }
 
             //using (var db = new PortfolioContext())
             //{
@@ -63,7 +41,6 @@ namespace Bexcelsa
             //    }
 
             //}
-            Symbol.SymbolPrint(symbolList);
 
             // work on learning entity framework
         }

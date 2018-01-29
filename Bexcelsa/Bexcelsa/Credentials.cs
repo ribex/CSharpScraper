@@ -6,9 +6,13 @@ namespace Bexcelsa
 {
     public class Credentials
     {
-        public Credentials()
+        private readonly string _username;
+        private readonly string _password;
+
+        public Credentials(string username, string password)
         {
-            
+            _username = username;
+            _password = password;
         }
 
         // log in to site
@@ -27,8 +31,5 @@ namespace Bexcelsa
             driver.Keyboard.SendKeys(password);
             driver.FindElement(By.Id("login-signin")).Click();
         }
-
-        public string Username { get; set; }
-        public string Password { get; set; }
     }
 }
